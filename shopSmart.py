@@ -14,7 +14,6 @@
 
 """
 Here's the intended output of this script, once you fill it in:
-
 Welcome to shop1 fruit shop
 Welcome to shop2 fruit shop
 For orders:  [('apples', 1.0), ('oranges', 3.0)] best shop is shop1
@@ -30,7 +29,40 @@ def shopSmart(orderList, fruitShops):
         fruitShops: List of FruitShops
     """
     "*** YOUR CODE HERE ***"
-    return None
+    storeCost1 = 0.0
+    storeCost2 = 0.0
+    shopSave = None;
+
+    # since shop has a method for getting the price of an order
+    # we use that.
+
+    #first we iterate through the shops though
+    for shopping in fruitShops:
+        # we get the price and set it to the storeCost2 because for our
+        # second store, that's where it gets saved first
+        price = shopping.getPriceOfOrder(orderList)
+        storeCost2 = price
+
+        # this should only be hit on the second iteration
+        # we check if the cost of store 1 is less than store 2
+        # and make sure it's the second iteration because if it's
+        # the first iteration, storeCost1 is still 0
+        if(storeCost2 > storeCost1 and storeCost1 != 0.0):
+            # if we hit this return, it means store 1 had a better deal.
+            return shopSave
+
+        # we save the first store, that way we can access the prev
+        # store to return
+        shopSave = shopping
+
+        # now we store the first store's price
+        storeCost1 = price
+
+
+    # this can either be shopSave or shopping, it doesn't matter
+    # since we change shopSave if we don't hit the first return
+    # which is always the second shop
+    return shopping
 
 
 if __name__ == '__main__':
